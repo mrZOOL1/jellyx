@@ -5,11 +5,12 @@
   list-style-type: none;
   font-size: 1rem;
   font-weight: 600;
-  --blue: rgb(0, 149, 255);
+  --red: rgb(255, 0, 0);
   --lightgray: rgb(200, 200, 200);
-  --shadow: 0px 0px 10px 2px rgba(13, 0, 255, 0.9);
+  --shadow: 0px 0px 10px 2px rgb(255, 0, 0);
   color: white;
   z-index: 1;
+  text-decoration: none;
 }
 
 body {
@@ -25,57 +26,96 @@ body {
   position: relative;
 }
 
-.pad {
-  padding-inline: 10px;
-}
-
-nav {
+.navigation {
   z-index: 2;
   background-color: black;
   position:sticky;
   top: 0;
   width: 100%;
-  height: 150px;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid white;
   transition: opacity ease 200ms;
+  box-shadow: var(--shadow);
+  padding-inline: 25px;
 }
 
-.navul {
+.thinul {
+  display: none;
+}
+
+.wideul {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 25px;
 }
 
-.navli a {
-  text-decoration: none;
+.wideul a {
   font-size: 1.25rem;
+  transition: color ease 150ms;
 }
 
-a:visited {
-  color: white;
+.wideul a:hover {
+  color: red;
 }
 
-nav i {
-  scale: 1.5;
-  margin-right: 3px;
+#navxmark {
+  scale: 2;
+  transition: scale ease 150ms;
+  cursor: pointer;
+}
+
+#navxmark:hover {
+  scale: 2.75;
+}
+
+.phonenavigation {
+  position: sticky;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 200px;
+  z-index: 5;
+  background-color: black;
+  border-bottom: 1px solid white;
+  box-shadow: var(--shadow);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: right;
+}
+
+.phonelinks {
+  margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.phoneli a {
+  font-size: 1.25rem;
+  transition: color ease 150ms;
+}
+
+.phoneli a:hover {
+  color: red;
 }
 
 header {
-  transform: translateY(-50px);
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
 }
 
 header h1 {
   text-align: center;
   font-size: 5rem;
-  text-shadow: 1px 1px 2px blue;
+
 }
 
 main {
@@ -91,6 +131,8 @@ section {
 
 .sectiontitle {
   margin-bottom: 10px;
+  font-size: 2.5rem;
+  text-align: center;
 }
 
 hr {
@@ -101,9 +143,21 @@ hr {
   margin-block: 20px;
 }
 
-section h1 {
-  font-size: 2.5rem;
-  text-align: center;
+.info {
+  height: 100%;
+  transform: translateX(5vw);
+  width: 90vw;
+  justify-content: center;
+}
+
+.text {
+  font-size: 1rem;
+  line-height: 25px;
+}
+
+.textcontainer {
+  text-align: right;
+  width: 75%;
 }
 
 .questionscontainer {
@@ -146,11 +200,12 @@ section h1 {
   overflow: hidden;
   height: 0px;
   transition: height ease 300ms;
+  text-align: right;
 }
 
 
 .grown {
-  height: 100px;
+  height: 75px;
 }
 
 .answer p {
@@ -166,15 +221,13 @@ section h1 {
 }
 
 .image {
-  width: 253px;
-  height: 253px;
+  width: min(30vw,253.33px);
+  height: min(30vw,253.33px);
   border-radius: 20px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   border: 2px solid white;
-  scale: 1;
-  transition: scale ease 150ms;
   box-shadow: var(--shadow);
 }
 
@@ -207,20 +260,21 @@ section h1 {
 }
 
 .bigimage {
+  border: 2px solid white;
   width: auto;
   height: min(80vh, 600px);
   border-radius: 20px;
-  box-shadow: 0px 0px 100px 10px rgba(13, 0, 255, 0.9);
+  box-shadow: 0px 0px 20px 5px rgb(255, 0, 0);
 }
 
-.fa-xmark {
-  z-index: 2;
+#xmark {
+  z-index: 5;
   cursor: pointer;
   margin-top: 50px;
-  margin-left: 50px;
+  margin-right: 50px;
   scale: 4;
   top: 0;
-  left: 0;
+  right: 0;
   position: absolute;
   transition: scale ease 150ms;
 }
@@ -251,7 +305,7 @@ section h1 {
   right: 0;
 }
 
-.fa-xmark:hover{
+#xmark:hover{
   scale: 5;
 }
 
@@ -267,23 +321,45 @@ footer {
   margin-bottom: 15px;
   width: 100%;
   display: flex;
+  flex-direction: column;
+}
+
+.footer i {
+  color: var(--red);
+}
+
+.footercontainer {
+  width: 100%;
+  display: flex;
   justify-content: space-between;
+  padding-inline: 10px;
 }
 
 .socialtop {
+  margin-left: 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
 }
 
 .socialbottom{
   display: none;
 }
 
+.socialbottom .fa-facebook-f {
+  margin-top: 10px;
+  margin-left: 5px;
+}
+
+.socialbottom .fa-instagram {
+  margin-top: 10px;
+  margin-right: 5px;
+}
+
 .socialtop i, .socialbottom i {
-  scale: 1.25;
+  scale: 2;
 }
 
 .contacts {
@@ -294,7 +370,7 @@ footer {
 }
 
 .contact {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
 }
 
 .contactContainer {
@@ -305,7 +381,7 @@ footer {
 
 @media (min-width: 600px) {
 
-  footer {
+  .footercontainer {
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -332,14 +408,6 @@ footer {
 
 }
 
-@media (max-width: 600px) {
-
-  header h1 {
-    font-size: 3rem;
-  }
-
-}
-
 @media (max-width: 1000px) {
 
   #leftarrow {
@@ -359,4 +427,61 @@ footer {
     height: auto;
   }
 
+}
+
+@media (max-width: 800px) {
+
+  .textcontainer {
+    width: 90%;
+  }
+
+}
+
+@media (max-width: 750px) {
+
+  .wideimg, .wideul {
+    display: none;
+  }
+
+  .thinul {
+    display: block;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .thinul i {
+    scale: 2;
+    color: var(--red);
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  header h1 {
+    font-size: 3rem;
+  }
+
+}
+
+@media (max-width: 400px) {
+
+  .contacts p {
+    font-size: 1rem;
+  }
+
+}
+
+@media (max-width: 300px) {
+
+  .contacts p {
+    font-size: 0.75rem;
+  }
+
+}
+
+nextjs-portal {
+  display: none;
 }

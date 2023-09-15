@@ -1,4 +1,5 @@
 'use client';
+
 import './globals.css'
 import React from 'react';
 
@@ -6,54 +7,46 @@ export default function Home() {
 
   const [Gallery, SetGallery] = React.useState(false);
   const [Url, SetUrl] = React.useState('1');
-  const [FirstRender, SetFirstRender] = React.useState(true);
+  const [NavOpen, SetNavOpen] = React.useState(false);
   const ImageIndex = React.useRef(1);
 
-
-  const disablescroll = function(ev) {
-    ev.addEventListener('scroll', console.log('yes'));
-    if(Gallery) {
-      ev.preventDefault();
-      ev.stopPropagation();
-    }
-  }
-
   const faq = function(ev) {
+
     if(!Gallery) {
       ev.querySelector('.answer').classList.toggle('grown');
       ev.querySelector('i').classList.toggle('fa-plus');
       ev.querySelector('i').classList.toggle('fa-minus');
     }
+
   }
 
   const openimage = function(ev) {
+
     if(!Gallery) {
+
+      if(NavOpen) {SetNavOpen(false);}
       SetGallery(old => !old);
+      
     }
 
     SetUrl(ev.id);
     ImageIndex.current = ev.id;
+
   }
 
   const closeimage = function(ev) {
 
-    let XClicked = false;
-
-    if(ev.id === 'xmark') {
-      XClicked = true;
-    }
-
-    if(Gallery && XClicked) {
       SetGallery(old => !old);
-    }
+      const bottom = document.querySelector('footer');
+      bottom.scrollIntoView();
   }
 
   const count = function(ev) {
 
     if(ev.id === 'leftarrow') {
     
-      if(ImageIndex.current === 1 || FirstRender) {
-        ImageIndex.current = 17;
+      if(ImageIndex.current === 1 || Url === '1') {
+        ImageIndex.current = 20;
       } else {
         ImageIndex.current--;
       }
@@ -61,7 +54,7 @@ export default function Home() {
 
     } else {
 
-      if(ImageIndex.current === 17) {
+      if(ImageIndex.current === 20) {
         ImageIndex.current = 1;
       } else {
         ImageIndex.current++;
@@ -69,23 +62,34 @@ export default function Home() {
       SetUrl(ImageIndex.current);
 
     }
-    SetFirstRender(false);
+  }
+
+  const opennav = function(ev) {
+
+    SetNavOpen(true)
+
+  }
+
+  const closenav = function(ev) {
+
+    SetNavOpen(false)
+
   }
 
   return (
-    <div className='page' onClick={(e) => closeimage(e.target)} onScroll={(e) => disablescroll(e)}>
+    <div className='page'>
 
       <div className="slideshow" style={{display: Gallery ? '' : 'none'}}>
 
-        <i id='xmark' className="fa-solid fa-xmark"></i>
-
+        <i id='xmark' className="fa-solid fa-xmark" onClick={(e) => closeimage(e.target)}></i>
+        
         <div className="slide">
           
           <img src="/images/triangle.png" alt="left arrow" id="leftarrow" className='arrow' onClick={(e) => count(e.target)}/>
 
           <div className="bigimagecontainer">
             <img src={`/images/${Url}.jpg`} alt="image" className="bigimage"/>
-            <h1 className="imagesleft">{ImageIndex.current}/17</h1>
+            <h1 className="imagesleft">{Url}/20</h1>
           </div>
 
           <img src="/images/triangle.png" alt="right arrow" id="rightarrow" className='arrow' onClick={(e) => count(e.target)}/>
@@ -94,35 +98,72 @@ export default function Home() {
 
       </div>
 
-      <nav className='navigation pad'>
+      <nav className='navigation' style={{display: NavOpen ? 'none' : ''}}>
 
-        <ul className="navul">
+        <img className='wideimg' src="/images/whitelogo.png" height='80' alt="logo"/>
 
-          <li className="navli">
-            <a href="">thing1</a>
-          </li>
+        <ul className="wideul">
 
-          <li className="navli">
-            <a href="">thing2</a>
-          </li>
+          <li className="navli"><a href="https://www.jerusalempaintball.com/">פיינטבול</a></li>
 
-          <li className="navli">
-            <a href="">thing3</a>
-          </li>
+          <li className="navli"><a href="http://www.alphateamextreme.com/PAGE14.asp">ווטר טאג</a></li>
+
+          <li className="navli"><a href="http://www.alphateamextreme.com/">לייזר טאג</a></li>
 
         </ul>
 
-        <img src="/images/logo.jpeg" alt="logo" height='100' width='100'/>
+        <ul className="thinul">
 
-        <i className="fa-solid fa-bars" style={{color: 'rgb(0, 149, 255)'}}></i>
+          <img src="/images/whitelogo.png" height='50' alt="logo"/>
+
+          <i className="fa-solid fa-bars" onClick={opennav}></i>
+
+        </ul>
 
       </nav>
 
-      <header className='header'>
-        <h1>דבר כזה עוד לא ראיתם</h1>
+      <nav className="phonenavigation"  style={{display: NavOpen ? '' : 'none'}}>
+
+        <ul className="phonelinks">
+
+          <li><i id='navxmark' className="fa-solid fa-xmark"  onClick={(e) => closenav()}></i></li>
+
+          <li className="phoneli"><a href="https://www.jerusalempaintball.com/">פיינטבול</a></li>
+
+          <li className="phoneli"><a href="http://www.alphateamextreme.com/PAGE14.asp">ווטר טאג</a></li>
+
+          <li className="phoneli"><a href="http://www.alphateamextreme.com/">לייזר טאג</a></li>
+
+        </ul>
+
+      </nav>
+
+      <header className='header' style={{transform: NavOpen ? 'translateY(-200px)' : 'translateY(-100px)'}}>
+        <h1>ברוכים הבאים<br/>JellyX</h1>
       </header>
 
       <main className='main'>
+
+        <hr className="linebreak" />
+
+          <section className="info">
+
+            <h1 className='sectiontitle'>?אז מה זה ג'ליבול</h1>
+
+            <div className="textcontainer">
+
+            <p className="text">
+            ג׳ליבול הוא משחק ספורטיבי חדש שבו שתי קבוצות מתמודדות אחת נגד השנייה במטרה לפגוע כמה שיותר בשחקני הקבוצה היריבה עם רובי ג׳ליבול
+            <br />
+            המשחקים בעלי אופי מהיר ותחרותי,
+            אין צורך בציוד ישן וכבד בשביל לשחק ככה שאתם תוכלו בקלות להתרכז במשחק ולהנות מהחוויה   
+            <br />
+            המשחק דורש יציבות, טכניקה, תקשורת בין השחקנים ואי אפשר שלא להנות ממנו
+            </p>
+
+            </div>
+
+          </section>
 
         <hr className="linebreak" />
 
@@ -134,11 +175,13 @@ export default function Home() {
 
             <li className="question" onClick={(e)=>faq(e.currentTarget)}>
               <div className="questiontop">
-                <p className="questiontitle">?אז מה המשחק</p>
+                <p className="questiontitle">?כמה זמן המשחק</p>
                 <i className='fa-solid fa-plus' style={{color: 'black'}}></i>
               </div>
                 <div className="answer">
-                  <p>םגכחעגםכחע גכםעןחגכפעםחגכפםעח גכםעןחגכפם עחגפכםעח םגכחע םגכחעפםגןכחעםגןכחעםג גכםעןחגכםעןחגכםעחגםכןח</p>
+                  <p>
+                    משך הפעילות הוא כשעה וניתן להאריכה עם עוד סבבים
+                  </p>
                 </div>
             </li>
 
@@ -148,7 +191,9 @@ export default function Home() {
                 <i className='fa-solid fa-plus' style={{color: 'black'}}></i>
               </div>
                 <div className="answer">
-                  <p>םגכחעגםכחע גכםעןחגכפעםחגכפםעח גכםעןחגכפם עחגפכםעח םגכחע םגכחעפםגןכחעםגןכחעםג גכםעןחגכםעןחגכםעחגםכןח</p>
+                  <p>
+                    במתחם שלנו על גג הסינמה סיטי בירושלים או במקום לבחירתם שאליו נגיע
+                  </p>
                 </div>
             </li>
 
@@ -158,31 +203,26 @@ export default function Home() {
                 <i className='fa-solid fa-plus' style={{color: 'black'}}></i>
               </div>
                 <div className="answer">
-                  <p>םגכחעגםכחע גכםעןחגכפעםחגכפםעח גכםעןחגכפם עחגפכםעח םגכחע םגכחעפםגןכחעםגןכחעםג גכםעןחגכםעןחגכםעחגםכןח</p>
+                  <p>
+                    הפעילות מתאימה החל מגיל 7 ולקבוצות של 8 עד 50 משתתפים 
+                  </p>
                 </div>
             </li>
 
             <li className="question" onClick={(e)=>faq(e.currentTarget)}>
               <div className="questiontop">
-                <p className="questiontitle">?שאלה</p>
+                <p className="questiontitle">?האם זה כואב</p>
                 <i className='fa-solid fa-plus' style={{color: 'black'}}></i>
               </div>
                 <div className="answer">
-                  <p>םגכחעגםכחע גכםעןחגכפעםחגכפםעח גכםעןחגכפם עחגפכםעח םגכחע םגכחעפםגןכחעםגןכחעםג גכםעןחגכםעןחגכםעחגםכןח</p>
-                </div>
-            </li>
-
-            <li className="question" onClick={(e)=>faq(e.currentTarget)}>
-              <div className="questiontop">
-                <p className="questiontitle">?שאלה</p>
-                <i className='fa-solid fa-plus' style={{color: 'black'}}></i>
-              </div>
-                <div className="answer">
-                  <p>םגכחעגםכחע גכםעןחגכפעםחגכפםעח גכםעןחגכפם עחגפכםעח םגכחע םגכחעפםגןכחעםגןכחעםג גכםעןחגכםעןחגכםעחגםכןח</p>
+                  <p>
+                    !התשובה היא לא
+                    <br />
+                    בניגוד למשחקים אחרים הג'ליבול לא מכאיב ואינו משאיר לכלוך או סימנים
+                  </p>
                 </div>
             </li>
             
-
           </ul>
 
         </section>
@@ -193,8 +233,7 @@ export default function Home() {
 
           <h1 className='sectiontitle'>גלריה</h1>
 
-          <div className="imagescontainer pad">
-
+          <div className="imagescontainer">
             <div id='1' className="image" style={{backgroundImage: 'URL(/images/1.jpg)', scale: Gallery && 1}} onClick={(e) => openimage(e.currentTarget)}></div>
             <div id='2' className="image" style={{backgroundImage: 'URL(/images/2.jpg)', scale: Gallery && 1}} onClick={(e) => openimage(e.currentTarget)}></div>
             <div id='3' className="image" style={{backgroundImage: 'URL(/images/3.jpg)', scale: Gallery && 1}} onClick={(e) => openimage(e.currentTarget)}></div>
@@ -206,48 +245,54 @@ export default function Home() {
 
       </main>
 
-      <footer className='footer pad'>
+      <footer className='footer'>
 
-        <div className="socialtop">
+        <h1 className="sectiontitle">🤙דברו איתנו</h1>
 
-          <a href="https://www.instagram.com/jellyxtreme/">
-            <i className="fa-brands fa-instagram" style={{color: 'rgb(0, 149, 255)'}}></i>
-          </a>
+        <div className="footercontainer">
 
-          <a href="https://www.facebook.com/profile.php?id=61551043527964">
-            <i className="fa-brands fa-facebook-f" style={{color: 'rgb(0, 149, 255)'}}></i>
-          </a>
+          <div className="socialtop">
 
-        </div>
+            <a href="https://www.instagram.com/jellyxtreme/">
+              <i className="fa-brands fa-instagram"></i>
+            </a>
 
-        <div className="contacts">
+            <a href="https://www.facebook.com/profile.php?id=61551043527964">
+              <i className="fa-brands fa-facebook-f"></i>
+            </a>
 
-          <div className="contactContainer">
-            <p className='contact'>052-6242-225</p>
-            <i className="fa-solid fa-phone-flip" style={{color: 'rgb(0, 149, 255)'}}></i>
           </div>
 
-          <div className="contactContainer">
-            <p className='contact'>jellyyyyyx@gmail.com</p>
-            <i className="fa-solid fa-envelope" style={{color: 'rgb(0, 149, 255)'}}></i>
+          <div className="contacts">
+
+            <div className="contactContainer">
+              <p className='contact'>052-6242-225</p>
+              <i className="fa-solid fa-phone-flip"></i>
+            </div>
+
+            <div className="contactContainer">
+              <p className='contact'>jellyyyyyx@gmail.com</p>
+              <i className="fa-solid fa-envelope"></i>
+            </div>
+
+            <div className="contactContainer">
+              <p className='contact'>סינמה סיטי ירושלים</p>
+              <i className="fa-solid fa-location-dot"></i>
+            </div>
+
           </div>
 
-          <div className="contactContainer">
-            <p className='contact'>סינמה סיטי ירושלים</p>
-            <i className="fa-solid fa-location-dot" style={{color: 'rgb(0, 149, 255)'}}></i>
+          <div className="socialbottom">
+
+            <a href="https://www.instagram.com/jellyxtreme/">
+              <i className="fa-brands fa-instagram"></i>
+            </a>
+
+            <a href="https://www.facebook.com/profile.php?id=61551043527964">
+              <i className="fa-brands fa-facebook-f"></i>
+            </a>
+
           </div>
-
-        </div>
-
-        <div className="socialbottom">
-
-          <a href="https://www.instagram.com/jellyxtreme/">
-            <i className="fa-brands fa-instagram" style={{color: 'rgb(0, 149, 255)'}}></i>
-          </a>
-
-          <a href="https://www.facebook.com/profile.php?id=61551043527964">
-            <i className="fa-brands fa-facebook-f" style={{color: 'rgb(0, 149, 255)'}}></i>
-          </a>
 
         </div>
 
