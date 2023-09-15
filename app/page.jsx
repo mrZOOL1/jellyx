@@ -77,6 +77,7 @@ export default function Home() {
   }
 
   return (
+    
     <div className='page'>
 
       <div className="slideshow" style={{display: Gallery ? '' : 'none'}}>
