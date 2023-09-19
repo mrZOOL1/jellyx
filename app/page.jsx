@@ -156,8 +156,10 @@ export default function Home() {
             <p className="text">
             ג׳ליבול הוא משחק ספורטיבי חדש שבו שתי קבוצות מתמודדות אחת נגד השנייה במטרה לפגוע כמה שיותר בשחקני הקבוצה היריבה עם רובי ג׳ליבול
             <br />
+            <br />
             המשחקים בעלי אופי מהיר ותחרותי,
             אין צורך בציוד ישן וכבד בשביל לשחק ככה שאתם תוכלו בקלות להתרכז במשחק ולהנות מהחוויה   
+            <br />
             <br />
             המשחק דורש יציבות, טכניקה, תקשורת בין השחקנים ואי אפשר שלא להנות ממנו
             </p>
@@ -174,7 +176,7 @@ export default function Home() {
 
           <ul className="questionscontainer">
 
-            <li className="question" onClick={(e)=>faq(e.currentTarget)}>
+            <li className="question noSelect" onClick={(e)=>faq(e.currentTarget)}>
               <div className="questiontop">
                 <p className="questiontitle">?כמה זמן המשחק</p>
                 <i className='fa-solid fa-plus' style={{color: 'black'}}></i>
@@ -186,7 +188,7 @@ export default function Home() {
                 </div>
             </li>
 
-            <li className="question" onClick={(e)=>faq(e.currentTarget)}>
+            <li className="question noSelect" onClick={(e)=>faq(e.currentTarget)}>
               <div className="questiontop">
                 <p className="questiontitle">?איפה משחקים</p>
                 <i className='fa-solid fa-plus' style={{color: 'black'}}></i>
@@ -198,7 +200,7 @@ export default function Home() {
                 </div>
             </li>
 
-            <li className="question" onClick={(e)=>faq(e.currentTarget)}>
+            <li className="question noSelect" onClick={(e)=>faq(e.currentTarget)}>
               <div className="questiontop">
                 <p className="questiontitle">?למי זה מתאים</p>
                 <i className='fa-solid fa-plus' style={{color: 'black'}}></i>
@@ -210,7 +212,7 @@ export default function Home() {
                 </div>
             </li>
 
-            <li className="question" onClick={(e)=>faq(e.currentTarget)}>
+            <li className="question noSelect" onClick={(e)=>faq(e.currentTarget)}>
               <div className="questiontop">
                 <p className="questiontitle">?האם זה כואב</p>
                 <i className='fa-solid fa-plus' style={{color: 'black'}}></i>
