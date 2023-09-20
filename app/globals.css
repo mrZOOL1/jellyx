@@ -441,14 +441,6 @@ footer {
 
 }
 
-@media (max-width: 800px) {
-
-  .textcontainer {
-    width: 90%;
-  }
-
-}
-
 @media (max-width: 750px) {
 
   .wideimg, .wideul {
