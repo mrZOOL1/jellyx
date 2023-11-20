@@ -5,7 +5,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: "ג'ליקס: חווית ג'ליבול יחידה במינה",
-  description: 'The official website of jellyx',
+  description: "jellyx extreme jellyball jerusalem האתר הרשמי של ג'ליקס פעילויות ג'ליבול כיף ואקסטרים לילדים בסינמה סיטי ירושלים גליבול",
   icons: {
     icon: ['/icon/favicon.ico'],
     apple: ['/icon/apple-touch.png'],
@@ -16,7 +16,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="he">
       <head>
         <title>{metadata.title}</title>
         <script src="https://kit.fontawesome.com/e4c421bb39.js" crossOrigin="anonymous"></script>

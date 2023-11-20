@@ -22,6 +22,7 @@
   -ms-user-select: none;
   user-select: none;
 }
+
 .noSelect:focus {
   outline: none !important;
 }
@@ -42,7 +43,7 @@ body {
 .navigation {
   z-index: 2;
   background-color: black;
-  position:sticky;
+  position: sticky;
   top: 0;
   width: 100%;
   height: 100px;
@@ -201,7 +202,8 @@ hr {
   color: black;
 }
 
-.fa-plus, .fa-minus {
+.fa-plus,
+.fa-minus {
   position: absolute;
   left: 0;
   margin-left: 10px;
@@ -224,7 +226,7 @@ hr {
   color: black;
 }
 
-.imagescontainer  {
+.imagescontainer {
   width: 90%;
   display: flex;
   align-items: center;
@@ -233,8 +235,8 @@ hr {
 }
 
 .image {
-  width: min(30vw,253.33px);
-  height: min(30vw,253.33px);
+  width: min(30vw, 253.33px);
+  height: min(30vw, 253.33px);
   border-radius: 20px;
   background-position: center;
   background-repeat: no-repeat;
@@ -258,6 +260,7 @@ hr {
 }
 
 .slide {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -292,7 +295,9 @@ hr {
 }
 
 .imagesleft {
-  margin-top: 5px;
+  position: absolute;
+  bottom: 0;
+  transform: translateY(50px);
   font-size: 2rem;
 }
 
@@ -317,7 +322,7 @@ hr {
   right: 0;
 }
 
-#xmark:hover{
+#xmark:hover {
   scale: 5;
 }
 
@@ -325,7 +330,7 @@ hr {
   scale: 1.2;
 }
 
-.image:hover  {
+.image:hover {
   cursor: pointer;
 }
 
@@ -356,7 +361,7 @@ footer {
   gap: 20px;
 }
 
-.socialbottom{
+.socialbottom {
   display: none;
 }
 
@@ -370,7 +375,8 @@ footer {
   margin-right: 5px;
 }
 
-.socialtop i, .socialbottom i {
+.socialtop i,
+.socialbottom i {
   scale: 2;
 }
 
@@ -399,18 +405,18 @@ footer {
     align-items: center;
   }
 
-  .socialtop{
+  .socialtop {
     display: none;
   }
-  
-  .socialbottom{
+
+  .socialbottom {
     margin-top: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
   }
-  
+
   .contacts {
     display: flex;
     flex-direction: column;
@@ -425,7 +431,7 @@ footer {
   #leftarrow {
     margin-left: 10px;
   }
-  
+
   #rightarrow {
     margin-right: 10px;
   }
@@ -443,7 +449,8 @@ footer {
 
 @media (max-width: 750px) {
 
-  .wideimg, .wideul {
+  .wideimg,
+  .wideul {
     display: none;
   }
 
